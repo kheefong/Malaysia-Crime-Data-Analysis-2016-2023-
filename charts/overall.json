@@ -1,0 +1,329 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 500,
+    "height": 500,
+    "padding": 20,
+    "config": {
+        "view": {
+            "fill": "transparent",
+            "stroke": null
+        }
+    },
+    "data": [
+        {
+            "name": "raw",
+            "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/overall.csv",
+            "format": {
+                "type": "csv",
+                "parse": {
+                    "value": "number"
+                }
+            }
+        },
+        {
+            "name": "table",
+            "source": "raw",
+            "transform": [
+                {
+                    "type": "filter",
+                    "expr": "datum.value != null && isValid(datum.value)"
+                },
+                {
+                    "type": "joinaggregate",
+                    "ops": [
+                        "min",
+                        "max"
+                    ],
+                    "fields": [
+                        "value",
+                        "value"
+                    ],
+                    "as": [
+                        "min_val",
+                        "max_val"
+                    ],
+                    "groupby": [
+                        "aspect"
+                    ]
+                },
+                {
+                    "type": "formula",
+                    "as": "norm_value",
+                    "expr": "(datum.value - datum.min_val) / (datum.max_val - datum.min_val)"
+                },
+                {
+                    "type": "filter",
+                    "expr": "datum.state === state1 || datum.state === state2"
+                }
+            ]
+        },
+        {
+            "name": "keys",
+            "source": "raw",
+            "transform": [
+                {
+                    "type": "filter",
+                    "expr": "datum.value != null && isValid(datum.value)"
+                },
+                {
+                    "type": "aggregate",
+                    "groupby": [
+                        "aspect"
+                    ]
+                }
+            ]
+        }
+    ],
+    "signals": [
+        {
+            "name": "radius",
+            "value": 200
+        },
+        {
+            "name": "cx",
+            "value": 250
+        },
+        {
+            "name": "cy",
+            "value": 250
+        },
+        {
+            "name": "state1",
+            "value": "Selangor",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "None",
+                    "Johor",
+                    "Kedah",
+                    "Kelantan",
+                    "Melaka",
+                    "Negeri Sembilan",
+                    "Pahang",
+                    "Perak",
+                    "Perlis",
+                    "Pulau Pinang",
+                    "Sabah",
+                    "Sarawak",
+                    "Selangor",
+                    "Terengganu",
+                    "W.P. Kuala Lumpur"
+                ],
+                "name": "State 1: "
+            }
+        },
+        {
+            "name": "state2",
+            "value": "Perlis",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "None",
+                    "Johor",
+                    "Kedah",
+                    "Kelantan",
+                    "Melaka",
+                    "Negeri Sembilan",
+                    "Pahang",
+                    "Perak",
+                    "Perlis",
+                    "Pulau Pinang",
+                    "Sabah",
+                    "Sarawak",
+                    "Selangor",
+                    "Terengganu",
+                    "W.P. Kuala Lumpur"
+                ],
+                "name": "State 2: "
+            }
+        }
+    ],
+    "scales": [
+        {
+            "name": "angular",
+            "type": "point",
+            "range": {
+                "signal": "[-PI, PI]"
+            },
+            "padding": 0.5,
+            "domain": {
+                "data": "keys",
+                "field": "aspect"
+            }
+        },
+        {
+            "name": "radial",
+            "type": "linear",
+            "range": {
+                "signal": "[0, radius]"
+            },
+            "zero": true,
+            "domain": [
+                0,
+                1
+            ]
+        },
+        {
+            "name": "color",
+            "type": "ordinal",
+            "domain": [
+                "Johor",
+                "Kedah",
+                "Kelantan",
+                "Melaka",
+                "Negeri Sembilan",
+                "Pahang",
+                "Perak",
+                "Perlis",
+                "Pulau Pinang",
+                "Sabah",
+                "Sarawak",
+                "Selangor",
+                "Terengganu",
+                "W.P. Kuala Lumpur"
+            ],
+            "range": [
+                "#8B5A2B",
+                "#3E2723",
+                "#7ED957",
+                "#1B5E20",
+                "#E6C84F",
+                "#E6A96B",
+                "#64B5F6",
+                "#0D47A1",
+                "#CE93D8",
+                "#4A148C",
+                "#9E9E9E",
+                "#212121",
+                "#F48FB1",
+                "#880E4F"
+            ]
+        }
+    ],
+    "marks": [
+        {
+            "type": "rule",
+            "from": {
+                "data": "keys"
+            },
+            "encode": {
+                "enter": {
+                    "x": {
+                        "signal": "cx"
+                    },
+                    "y": {
+                        "signal": "cy"
+                    },
+                    "x2": {
+                        "signal": "cx + radius * sin(scale('angular', datum.aspect))"
+                    },
+                    "y2": {
+                        "signal": "cy - radius * cos(scale('angular', datum.aspect))"
+                    },
+                    "stroke": {
+                        "value": "#ccc"
+                    },
+                    "strokeWidth": {
+                        "value": 1
+                    }
+                }
+            }
+        },
+        {
+            "type": "group",
+            "from": {
+                "facet": {
+                    "name": "faceted",
+                    "data": "table",
+                    "groupby": "state"
+                }
+            },
+            "marks": [
+                {
+                    "type": "line",
+                    "from": {
+                        "data": "faceted"
+                    },
+                    "encode": {
+                        "enter": {
+                            "x": {
+                                "signal": "cx + scale('radial', datum.norm_value) * sin(scale('angular', datum.aspect))"
+                            },
+                            "y": {
+                                "signal": "cy - scale('radial', datum.norm_value) * cos(scale('angular', datum.aspect))"
+                            },
+                            "stroke": {
+                                "scale": "color",
+                                "field": "state"
+                            },
+                            "strokeWidth": {
+                                "value": 0
+                            },
+                            "fill": {
+                                "scale": "color",
+                                "field": "state"
+                            },
+                            "fillOpacity": {
+                                "value": 0.35
+                            }
+                        }
+                    }
+                },
+                {
+                    "type": "symbol",
+                    "from": {
+                        "data": "faceted"
+                    },
+                    "encode": {
+                        "enter": {
+                            "x": {
+                                "signal": "cx + scale('radial', datum.norm_value) * sin(scale('angular', datum.aspect))"
+                            },
+                            "y": {
+                                "signal": "cy - scale('radial', datum.norm_value) * cos(scale('angular', datum.aspect))"
+                            },
+                            "fill": {
+                                "scale": "color",
+                                "field": "state"
+                            },
+                            "size": {
+                                "value": 40
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "from": {
+                "data": "keys"
+            },
+            "encode": {
+                "enter": {
+                    "x": {
+                        "signal": "cx + (radius + 30) * sin(scale('angular', datum.aspect))"
+                    },
+                    "y": {
+                        "signal": "cy - (radius + 30) * cos(scale('angular', datum.aspect))"
+                    },
+                    "text": {
+                        "field": "aspect"
+                    },
+                    "align": {
+                        "value": "center"
+                    },
+                    "baseline": {
+                        "value": "middle"
+                    },
+                    "fontSize": {
+                        "value": 11
+                    },
+                    "fontWeight": {
+                        "value": "bold"
+                    }
+                }
+            }
+        }
+    ]
+}

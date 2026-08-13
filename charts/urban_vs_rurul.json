@@ -1,0 +1,87 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Crime in Urban and Rural Areas",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/rural_and_urban.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "calculate": "datum.zone === 'Rural' ? datum.crimes : 0",
+            "as": "rural_only"
+        },
+        {
+            "joinaggregate": [
+                {
+                    "op": "sum",
+                    "field": "rural_only",
+                    "as": "rural_total"
+                }
+            ],
+            "groupby": [
+                "state"
+            ]
+        }
+    ],
+    "mark": "bar",
+    "encoding": {
+        "x": {
+            "field": "state",
+            "type": "nominal",
+            "sort": {
+                "field": "rural_total",
+                "order": "descending"
+            },
+            "title": "State",
+            "axis": {
+                "labelAngle": 0
+            }
+        },
+        "y": {
+            "field": "crimes",
+            "type": "quantitative",
+            "title": "Number of Cases"
+        },
+        "xOffset": {
+            "field": "zone"
+        },
+        "color": {
+            "field": "zone",
+            "type": "nominal",
+            "legend": {
+                "title": "Zone"
+            },
+            "scale": {
+                "range": [
+                    "#009E73",
+                    "#6A3D9A"
+                ]
+            }
+        },
+        "tooltip": [
+            {
+                "field": "state",
+                "type": "nominal",
+                "title": "State"
+            },
+            {
+                "field": "zone",
+                "type": "nominal",
+                "title": "Zone"
+            },
+            {
+                "field": "crimes",
+                "type": "quantitative",
+                "title": "Total Cases",
+                "format": ","
+            }
+        ]
+    }
+}

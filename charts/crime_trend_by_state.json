@@ -1,0 +1,133 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Crime Ranking By State Over Time",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/crime_trend_by_state.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "calculate": "toNumber(datum.crimes)",
+            "as": "crimes_num"
+        },
+        {
+            "window": [
+                {
+                    "op": "rank",
+                    "as": "rank"
+                }
+            ],
+            "groupby": [
+                "year"
+            ],
+            "sort": [
+                {
+                    "field": "crimes_num",
+                    "order": "descending"
+                }
+            ]
+        }
+    ],
+    "mark": {
+        "type": "line",
+        "point": true
+    },
+    "encoding": {
+        "x": {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+        },
+        "y": {
+            "field": "rank",
+            "type": "ordinal",
+            "title": "Rank (1 = highest crime)"
+        },
+        "color": {
+            "field": "state",
+            "type": "nominal",
+            "title": "State",
+            "scale": {
+                "domain": [
+                    "Johor",
+                    "Kedah",
+                    "Kelantan",
+                    "Melaka",
+                    "Negeri Sembilan",
+                    "Pahang",
+                    "Perak",
+                    "Perlis",
+                    "Pulau Pinang",
+                    "Sabah",
+                    "Sarawak",
+                    "Selangor",
+                    "Terengganu",
+                    "W.P. Kuala Lumpur"
+                ],
+                "range": [
+                    "#8B5A2B",
+                    "#3E2723",
+                    "#7ED957",
+                    "#1B5E20",
+                    "#E6C84F",
+                    "#E6A96B",
+                    "#64B5F6",
+                    "#0D47A1",
+                    "#CE93D8",
+                    "#4A148C",
+                    "#9E9E9E",
+                    "#212121",
+                    "#F48FB1",
+                    "#880E4F"
+                ]
+            },
+            "legend": {
+                "symbolOpacity": 0.5
+            }
+        },
+        "opacity": {
+            "condition": {
+                "test": "indexof(['Selangor', 'Perlis'], datum.state) >= 0",
+                "value": 2
+            },
+            "value": 0.4
+        },
+        "size": {
+            "condition": {
+                "test": "indexof(['Selangor', 'Perlis'], datum.state) >= 0",
+                "value": 7
+            },
+            "value": 2
+        },
+        "tooltip": [
+            {
+                "field": "state",
+                "type": "nominal",
+                "title": "State"
+            },
+            {
+                "field": "year",
+                "type": "ordinal",
+                "title": "Year"
+            },
+            {
+                "field": "crimes_num",
+                "type": "quantitative",
+                "title": "Crimes",
+                "format": ","
+            },
+            {
+                "field": "rank",
+                "type": "ordinal",
+                "title": "Rank"
+            }
+        ]
+    }
+}

@@ -1,0 +1,255 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Crime Rate per 100,000 people by State",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 330,
+    "projection": {
+        "type": "mercator",
+        "center": [
+            109.5,
+            3.5
+        ],
+        "scale": 2250
+    },
+    "layer": [
+        {
+            "data": {
+                "sphere": true
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "#cfe8ff"
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/main/data/map.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_10m_admin_0_countries"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "#eeeeee",
+                "stroke": "#aaaaaa",
+                "strokeWidth": 0.5
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/main/data/map.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "ne_10m_graticules_1"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "stroke": "#cccccc",
+                "strokeWidth": 0.5
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/main/data/map.topojson",
+                "format": {
+                    "type": "topojson",
+                    "feature": "malaysia.state"
+                }
+            },
+            "transform": [
+                {
+                    "calculate": "indexof(datum.properties.name, 'WP K Lumpur') >= 0 ? 'W.P. Kuala Lumpur' : datum.properties.name",
+                    "as": "state_fixed"
+                },
+                {
+                    "lookup": "state_fixed",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/normalized_crime_by_state.csv",
+                            "format": {
+                                "type": "csv"
+                            }
+                        },
+                        "key": "state",
+                        "fields": [
+                            "crime_rate"
+                        ]
+                    }
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "stroke": "black",
+                "strokeWidth": 0.3
+            },
+            "encoding": {
+                "color": {
+                    "field": "crime_rate",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "reds"
+                    },
+                    "legend": {
+                        "title": null
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "properties.name",
+                        "type": "nominal",
+                        "title": "State"
+                    },
+                    {
+                        "field": "crime_rate",
+                        "type": "quantitative",
+                        "format": ",",
+                        "title": "Crime Rate"
+                    }
+                ]
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/normalized_crime_by_state.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "transform": [
+                {
+                    "lookup": "state",
+                    "from": {
+                        "data": {
+                            "values": [
+                                {"state": "Johor", "lat": 1.6, "lon": 103.7},
+                                {"state": "Kedah", "lat": 5.8, "lon": 100.7},
+                                {"state": "Kelantan", "lat": 5.3, "lon": 102.0},
+                                {"state": "Pahang", "lat": 3.8, "lon": 102.5},
+                                {"state": "Perak", "lat": 4.8, "lon": 101.0},
+                                {"state": "Sabah", "lat": 5.3, "lon": 117.0},
+                                {"state": "Sarawak", "lat": 2.5, "lon": 113.0},
+                                {"state": "Selangor", "lat": 3.3, "lon": 101.5},
+                                {"state": "Terengganu", "lat": 5.0, "lon": 103.0}
+                            ]
+                        },
+                        "key": "state",
+                        "fields": [
+                            "lat",
+                            "lon"
+                        ]
+                    }
+                }
+            ],
+            "mark": {
+                "type": "text",
+                "fontSize": 10,
+                "fontWeight": "bold",
+                "dy": -10
+            },
+            "encoding": {
+                "longitude": {
+                    "field": "lon",
+                    "type": "quantitative"
+                },
+                "latitude": {
+                    "field": "lat",
+                    "type": "quantitative"
+                },
+                "text": {
+                    "field": "state",
+                    "type": "nominal"
+                },
+                "color": {
+                    "value": "black"
+                }
+            }
+        },
+        {
+            "data": {
+                "values": [
+                    {
+                        "label": "W.P. Kuala Lumpur",
+                        "lon": 101.7,
+                        "lat": 3.15,
+                        "lon2": 105,
+                        "lat2": 3.7
+                    },
+                    {
+                        "label": "Perlis",
+                        "lon": 100.2,
+                        "lat": 6.4,
+                        "lon2": 101.5,
+                        "lat2": 7
+                    },
+                    {
+                        "label": "Pulau Pinang",
+                        "lon": 100.4,
+                        "lat": 5.4,
+                        "lon2": 102,
+                        "lat2": 6.3
+                    },
+                    {
+                        "label": "Negeri Sembilan",
+                        "lon": 102.2,
+                        "lat": 2.9,
+                        "lon2": 105,
+                        "lat2": 3.0
+                    },
+                    {
+                        "label": "Melaka",
+                        "lon": 102.3,
+                        "lat": 2.3,
+                        "lon2": 100.7,
+                        "lat2": 2.4
+                    }
+                ]
+            },
+            "layer": [
+                {
+                    "mark": "rule",
+                    "encoding": {
+                        "longitude": {
+                            "field": "lon",
+                            "type": "quantitative"
+                        },
+                        "latitude": {
+                            "field": "lat",
+                            "type": "quantitative"
+                        },
+                        "longitude2": {
+                            "field": "lon2"
+                        },
+                        "latitude2": {
+                            "field": "lat2"
+                        }
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 10,
+                        "fontWeight": "bold",
+                        "dx": 10,
+                        "dy": -5
+                    },
+                    "encoding": {
+                        "longitude": {
+                            "field": "lon2"
+                        },
+                        "latitude": {
+                            "field": "lat2"
+                        },
+                        "text": {
+                            "field": "label"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

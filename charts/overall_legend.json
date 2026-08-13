@@ -1,0 +1,170 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "width": 500,
+    "height": 500,
+    "padding": 20,
+    "signals": [
+        {
+            "name": "legendX",
+            "value": 210
+        },
+        {
+            "name": "legendY",
+            "value": 480
+        },
+        {
+            "name": "rows",
+            "value": 5
+        },
+        {
+            "name": "itemWidth",
+            "value": 120
+        },
+        {
+            "name": "itemHeight",
+            "value": 17
+        }
+    ],
+    "data": [
+        {
+            "name": "states",
+            "values": [
+                "Johor",
+                "Kedah",
+                "Kelantan",
+                "Melaka",
+                "Negeri Sembilan",
+                "Pahang",
+                "Perak",
+                "Perlis",
+                "Pulau Pinang",
+                "Sabah",
+                "Sarawak",
+                "Selangor",
+                "Terengganu",
+                "W.P. Kuala Lumpur"
+            ],
+            "transform": [
+                {
+                    "type": "window",
+                    "ops": [
+                        "row_number"
+                    ],
+                    "as": [
+                        "index"
+                    ]
+                },
+                {
+                    "type": "formula",
+                    "as": "row",
+                    "expr": "datum.index % rows"
+                },
+                {
+                    "type": "formula",
+                    "as": "col",
+                    "expr": "floor(datum.index / rows)"
+                }
+            ]
+        }
+    ],
+    "scales": [
+        {
+            "name": "color",
+            "type": "ordinal",
+            "domain": [
+                "Johor",
+                "Kedah",
+                "Kelantan",
+                "Melaka",
+                "Negeri Sembilan",
+                "Pahang",
+                "Perak",
+                "Perlis",
+                "Pulau Pinang",
+                "Sabah",
+                "Sarawak",
+                "Selangor",
+                "Terengganu",
+                "W.P. Kuala Lumpur"
+            ],
+            "range": [
+                "#8B5A2B",
+                "#3E2723",
+                "#7ED957",
+                "#1B5E20",
+                "#E6C84F",
+                "#E6A96B",
+                "#64B5F6",
+                "#0D47A1",
+                "#CE93D8",
+                "#4A148C",
+                "#9E9E9E",
+                "#212121",
+                "#F48FB1",
+                "#880E4F"
+            ]
+        }
+    ],
+    "marks": [
+        {
+            "type": "rect",
+            "from": {
+                "data": "states"
+            },
+            "encode": {
+                "enter": {
+                    "x": {
+                        "signal": "legendX + datum.col * itemWidth + 3"
+                    },
+                    "y": {
+                        "signal": "legendY + datum.row * itemHeight + 5"
+                    },
+                    "width": {
+                        "value": 11
+                    },
+                    "height": {
+                        "value": 11
+                    },
+                    "fill": {
+                        "scale": "color",
+                        "field": "data"
+                    },
+                    "fillOpacity": {
+                        "value": 0.75
+                    },
+                    "stroke": {
+                        "value": "#ffffff"
+                    }
+                }
+            }
+        },
+        {
+            "type": "text",
+            "from": {
+                "data": "states"
+            },
+            "encode": {
+                "enter": {
+                    "x": {
+                        "signal": "legendX + datum.col * itemWidth + 20"
+                    },
+                    "y": {
+                        "signal": "legendY + datum.row * itemHeight + 11"
+                    },
+                    "text": {
+                        "field": "data"
+                    },
+                    "fontSize": {
+                        "value": 12
+                    },
+                    "baseline": {
+                        "value": "middle"
+                    },
+                    "fill": {
+                        "value": "#333"
+                    }
+                }
+            }
+        }
+    ]
+}

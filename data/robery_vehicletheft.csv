@@ -1,0 +1,8 @@
+,crime_group,type,crimes
+0,Robbery,Gang Armed,205
+1,Robbery,Gang Unarmed,44360
+2,Robbery,Solo Armed,67
+3,Robbery,Solo Unarmed,26089
+4,Vehicle theft,Lorry Theft,11504
+5,Vehicle theft,Motorcar Theft,47281
+6,Vehicle theft,Motorcycle Theft,162659

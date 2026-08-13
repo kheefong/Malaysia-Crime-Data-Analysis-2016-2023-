@@ -1,0 +1,113 @@
+state,aspect,value
+Johor,Rural Crime,0.3919888275249159
+Kedah,Rural Crime,0.298609788611693
+Kelantan,Rural Crime,0.4247127531263886
+Melaka,Rural Crime,0.0833809433123849
+Negeri Sembilan,Rural Crime,0.133403161302609
+Pahang,Rural Crime,0.2202755030787786
+Perak,Rural Crime,0.282200215831905
+Perlis,Rural Crime,0.0
+Pulau Pinang,Rural Crime,0.3835459912397638
+Sabah,Rural Crime,0.4908906240081254
+Sarawak,Rural Crime,0.4374722275122198
+Selangor,Rural Crime,1.0
+Terengganu,Rural Crime,0.1955500539579762
+W.P. Kuala Lumpur,Rural Crime,
+Johor,Urban Crime,0.4044560794004191
+Kedah,Urban Crime,0.2426866961890082
+Kelantan,Urban Crime,0.0648186659489964
+Melaka,Urban Crime,0.0924326572554008
+Negeri Sembilan,Urban Crime,0.1237165528996322
+Pahang,Urban Crime,0.0931829488089121
+Perak,Urban Crime,0.1748668640259666
+Perlis,Urban Crime,0.0
+Pulau Pinang,Urban Crime,0.1675922980940963
+Sabah,Urban Crime,0.1586948189106093
+Sarawak,Urban Crime,0.206607458876683
+Selangor,Urban Crime,1.0
+Terengganu,Urban Crime,0.0391782676420456
+W.P. Kuala Lumpur,Urban Crime,
+Johor,Total Crime,0.4019075425790754
+Kedah,Total Crime,0.2541184103811841
+Kelantan,Total Crime,0.1383876723438767
+Melaka,Total Crime,0.0905823195458232
+Negeri Sembilan,Total Crime,0.1256966747769667
+Pahang,Total Crime,0.1191630170316301
+Perak,Total Crime,0.1968077858880778
+Perlis,Total Crime,0.0
+Pulau Pinang,Total Crime,0.2117372262773722
+Sabah,Total Crime,0.2266017842660178
+Sarawak,Total Crime,0.2538004866180048
+Selangor,Total Crime,1.0
+Terengganu,Total Crime,0.0711435523114355
+W.P. Kuala Lumpur,Total Crime,0.9822092457420925
+Johor,Crimes Rate Per 100000 People,0.2082784881966523
+Kedah,Crimes Rate Per 100000 People,0.3073975923705718
+Kelantan,Crimes Rate Per 100000 People,0.1043739838131527
+Melaka,Crimes Rate Per 100000 People,0.2624790740107815
+Negeri Sembilan,Crimes Rate Per 100000 People,0.3099815311051752
+Pahang,Crimes Rate Per 100000 People,0.1005997110374614
+Perak,Crimes Rate Per 100000 People,0.100309824307412
+Perlis,Crimes Rate Per 100000 People,0.1375889901574588
+Pulau Pinang,Crimes Rate Per 100000 People,0.3374183501774986
+Sabah,Crimes Rate Per 100000 People,0.0
+Sarawak,Crimes Rate Per 100000 People,0.189509321137092
+Selangor,Crimes Rate Per 100000 People,0.4173559023783688
+Terengganu,Crimes Rate Per 100000 People,0.061396607840176
+W.P. Kuala Lumpur,Crimes Rate Per 100000 People,1.0
+Johor,Stability,0.1960459568340402
+Kedah,Stability,0.8364004449668815
+Kelantan,Stability,0.3939880522731768
+Melaka,Stability,0.1941354481981617
+Negeri Sembilan,Stability,0.3307942661936036
+Pahang,Stability,0.595373179931628
+Perak,Stability,0.7584027037461548
+Perlis,Stability,0.9878735353393416
+Pulau Pinang,Stability,0.9422559695008342
+Sabah,Stability,0.8933718742230052
+Sarawak,Stability,0.9878852765534868
+Selangor,Stability,0.5013942973250928
+Terengganu,Stability,1.0
+W.P. Kuala Lumpur,Stability,0.0
+Johor,Crime Rank (1 = highest crime),0.8461538461538463
+Kedah,Crime Rank (1 = highest crime),0.7692307692307693
+Kelantan,Crime Rank (1 = highest crime),0.3846153846153846
+Melaka,Crime Rank (1 = highest crime),0.1538461538461538
+Negeri Sembilan,Crime Rank (1 = highest crime),0.3076923076923077
+Pahang,Crime Rank (1 = highest crime),0.2307692307692307
+Perak,Crime Rank (1 = highest crime),0.4615384615384615
+Perlis,Crime Rank (1 = highest crime),0.0
+Pulau Pinang,Crime Rank (1 = highest crime),0.5384615384615385
+Sabah,Crime Rank (1 = highest crime),0.6153846153846154
+Sarawak,Crime Rank (1 = highest crime),0.6923076923076923
+Selangor,Crime Rank (1 = highest crime),1.0
+Terengganu,Crime Rank (1 = highest crime),0.0769230769230767
+W.P. Kuala Lumpur,Crime Rank (1 = highest crime),0.9230769230769232
+Johor,Assault Crime,0.3681672943056031
+Kedah,Assault Crime,0.1819011753965537
+Kelantan,Assault Crime,0.088040625356613
+Melaka,Assault Crime,0.1004792879150975
+Negeri Sembilan,Assault Crime,0.1291509756932557
+Pahang,Assault Crime,0.0938605500399406
+Perak,Assault Crime,0.1967077484879607
+Perlis,Assault Crime,0.0
+Pulau Pinang,Assault Crime,0.1938833732739929
+Sabah,Assault Crime,0.1074974323861691
+Sarawak,Assault Crime,0.1492639507018144
+Selangor,Assault Crime,1.0
+Terengganu,Assault Crime,0.0431073833162159
+W.P. Kuala Lumpur,Assault Crime,0.5253623188405797
+Johor,Property Crime,0.4130347810340398
+Kedah,Property Crime,0.2761763182386705
+Kelantan,Property Crime,0.153653082452823
+Melaka,Property Crime,0.0879232871635706
+Negeri Sembilan,Property Crime,0.1250415864767094
+Pahang,Property Crime,0.126978779315834
+Perak,Property Crime,0.1974083728843538
+Perlis,Property Crime,0.0
+Pulau Pinang,Property Crime,0.2176225590317405
+Sabah,Property Crime,0.2624222490808862
+Sarawak,Property Crime,0.2853990406684157
+Selangor,Property Crime,1.0
+Terengganu,Property Crime,0.0796270482655807
+W.P. Kuala Lumpur,Property Crime,0.4654905940865083

@@ -1,0 +1,204 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Male vs Female Inmates in Malaysia",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 350,
+    "config": {
+        "view": {
+            "stroke": null
+        }
+    },
+    "data": {
+        "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/male_female.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "layer": [
+        {
+            "transform": [
+                {
+                    "calculate": "datum.sex === 'male' ? 'Male' : 'Female'",
+                    "as": "sex_renamed"
+                }
+            ],
+            "mark": {
+                "type": "arc",
+                "innerRadius": 60
+            },
+            "encoding": {
+                "theta": {
+                    "field": "prisoners",
+                    "type": "quantitative"
+                },
+                "color": {
+                    "field": "sex_renamed",
+                    "type": "nominal",
+                    "title": "Gender",
+                    "scale": {
+                        "range": [
+                            "#F58518",
+                            "#4C78A8"
+                        ]
+                    },
+                    "legend": {
+                        "title": "Gender",
+                        "orient": "right",
+                        "offset": -40
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "sex_renamed",
+                        "type": "nominal",
+                        "title": "Sex"
+                    },
+                    {
+                        "field": "prisoners",
+                        "type": "quantitative",
+                        "title": "Count"
+                    }
+                ]
+            }
+        },
+        {
+            "transform": [
+                {
+                    "joinaggregate": [
+                        {
+                            "op": "sum",
+                            "field": "prisoners",
+                            "as": "grand_total"
+                        }
+                    ]
+                },
+                {
+                    "filter": "datum.sex === 'male'"
+                },
+                {
+                    "calculate": "datum.prisoners / datum.grand_total",
+                    "as": "percent"
+                }
+            ],
+            "mark": {
+                "type": "text",
+                "fontSize": 20,
+                "fontWeight": "bold"
+            },
+            "encoding": {
+                "x": {
+                    "value": 140
+                },
+                "y": {
+                    "value": 200
+                },
+                "text": {
+                    "field": "percent",
+                    "type": "quantitative",
+                    "format": ".1%"
+                },
+                "color": {
+                    "value": "white"
+                }
+            }
+        },
+        {
+            "transform": [
+                {
+                    "joinaggregate": [
+                        {
+                            "op": "sum",
+                            "field": "prisoners",
+                            "as": "grand_total"
+                        }
+                    ]
+                },
+                {
+                    "filter": "datum.sex === 'female'"
+                },
+                {
+                    "calculate": "datum.prisoners / datum.grand_total",
+                    "as": "percent"
+                }
+            ],
+            "mark": {
+                "type": "text",
+                "fontSize": 20,
+                "fontWeight": "bold"
+            },
+            "encoding": {
+                "x": {
+                    "value": 300
+                },
+                "y": {
+                    "value": 60
+                },
+                "text": {
+                    "field": "percent",
+                    "type": "quantitative",
+                    "format": ".1%"
+                },
+                "color": {
+                    "value": "white"
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "align": "center",
+                "baseline": "middle",
+                "fontSize": 14,
+                "fontWeight": "normal",
+                "dy": -10,
+                "color": "#6b7280"
+            },
+            "encoding": {
+                "x": {
+                    "signal": "width / 2"
+                },
+                "y": {
+                    "signal": "height / 2"
+                },
+                "text": {
+                    "value": "Total inmates:"
+                }
+            }
+        },
+        {
+            "transform": [
+                {
+                    "aggregate": [
+                        {
+                            "op": "sum",
+                            "field": "prisoners",
+                            "as": "total_inmates"
+                        }
+                    ]
+                }
+            ],
+            "mark": {
+                "type": "text",
+                "align": "center",
+                "baseline": "middle",
+                "fontSize": 18,
+                "dy": 10,
+                "fontWeight": "bold"
+            },
+            "encoding": {
+                "x": {
+                    "signal": "width / 2"
+                },
+                "y": {
+                    "signal": "height / 2"
+                },
+                "text": {
+                    "field": "total_inmates"
+                }
+            }
+        }
+    ]
+}

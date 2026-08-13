@@ -1,0 +1,64 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Murder and Rape Cases Over Time in Malaysia",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/srs_crime_by_stateyear.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "mark": {
+        "type": "area",
+        "opacity": 0.4
+    },
+    "encoding": {
+        "x": {
+            "field": "year",
+            "type": "temporal",
+            "title": "Year",
+            "axis": {
+                "format": "%Y",
+                "tickCount": "year",
+                "grid": false
+            }
+        },
+        "y": {
+            "field": "crimes",
+            "type": "quantitative",
+            "title": "Crime Count"
+        },
+        "color": {
+            "field": "type",
+            "type": "nominal",
+            "title": "Crime Type",
+            "scale": {
+                "range": [
+                    "#E15759", "#EDC948"
+                ]
+            }
+        },
+        "tooltip": [
+            {
+                "field": "year",
+                "type": "temporal",
+                "formatType": "year",
+                "title": "Year"
+            },
+            {
+                "field": "type",
+                "type": "nominal",
+                "title": "Type"
+            },
+            {
+                "field": "crimes",
+                "type": "quantitative",
+                "title": "Total Crimes"
+            }
+        ]
+    }
+}

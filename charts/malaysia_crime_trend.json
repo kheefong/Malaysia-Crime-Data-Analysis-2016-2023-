@@ -1,0 +1,186 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Malaysia's Crimes Over Time",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 300,
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/malaysia_crime_trend.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "transform": [
+                {
+                    "calculate": "'Malaysia Total'",
+                    "as": "series"
+                }
+            ],
+            "mark": "line",
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "temporal",
+                    "axis": {
+                        "format": "%Y"
+                    }
+                },
+                "y": {
+                    "field": "crimes",
+                    "type": "quantitative"
+                },
+                "color": {
+                    "field": "series",
+                    "type": "nominal",
+                    "legend": {
+                        "title": "Category",
+                        "symbolStrokeWidth": 5
+                    },
+                    "scale": {
+                        "domain": [
+                            "Malaysia Total",
+                            "Urban",
+                            "Rural"
+                        ],
+                        "range": [
+                            "#2F80ED",
+                            "#6A3D9A",
+                            "#009E73"
+                        ]
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "year",
+                        "type": "temporal",
+                        "formatType": "year",
+                        "title": "Year"
+                    },
+                    {
+                        "field": "crimes",
+                        "type": "quantitative",
+                        "title": "Total Crimes"
+                    }
+                ]
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/rural_and_urban_trend.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "mark": "line",
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "temporal",
+                    "title": "Year",
+                    "axis": {
+                        "format": "%Y",
+                        "tickCount": "year"
+                    }
+                },
+                "y": {
+                    "field": "crimes",
+                    "type": "quantitative",
+                    "axis": {
+                        "title": "Total Crimes"
+                    }
+                },
+                "color": {
+                    "field": "zone",
+                    "type": "nominal"
+                },
+                "tooltip": [
+                    {
+                        "field": "year",
+                        "type": "temporal",
+                        "formatType": "year",
+                        "title": "Year"
+                    },
+                    {
+                        "field": "crimes",
+                        "type": "quantitative",
+                        "title": "Total Crimes",
+                        "format": ","
+                    }
+                ]
+            }
+        },
+        {
+            "data": {
+                "values": [
+                    {
+                        "year": "2020",
+                        "crimes": 100000,
+                        "label": "Start of economic recession (COVID-19)"
+                    },
+                    {
+                        "year": "2021",
+                        "crimes": 80000,
+                        "label": "Economic stress accumulates"
+                    }
+                ]
+            },
+            "mark": {
+                "type": "text",
+                "align": "center",
+                "dx": 5,
+                "dy": -10,
+                "fontSize": 13,
+                "color": "black"
+            },
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "temporal"
+                },
+                "y": {
+                    "field": "crimes",
+                    "type": "quantitative"
+                },
+                "text": {
+                    "field": "label"
+                }
+            }
+        },
+        {
+            "data": {
+                "values": [
+                    {
+                        "year": "2020",
+                        "crimes": 100000
+                    },
+                    {
+                        "year": "2021",
+                        "crimes": 80000
+                    }
+                ]
+            },
+            "mark": {
+                "type": "rule",
+                "color": "black",
+                "strokeDash": [
+                    4,
+                    4
+                ]
+            },
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "temporal"
+                },
+                "y": {
+                    "field": "crimes",
+                    "type": "quantitative"
+                }
+            }
+        }
+    ]
+}

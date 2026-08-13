@@ -1,0 +1,17 @@
+type,year,crimes
+Murder,2016,456
+Murder,2017,379
+Murder,2018,323
+Murder,2019,310
+Murder,2020,253
+Murder,2021,243
+Murder,2022,240
+Murder,2023,258
+Rape,2016,1886
+Rape,2017,1835
+Rape,2018,1648
+Rape,2019,1738
+Rape,2020,1582
+Rape,2021,1553
+Rape,2022,1712
+Rape,2023,1914

@@ -1,0 +1,57 @@
+,crime_group,year,crimes
+0,Break in,2016,18760
+1,Break in,2017,16201
+2,Break in,2018,15742
+3,Break in,2019,16497
+4,Break in,2020,14040
+5,Break in,2021,11352
+6,Break in,2022,10585
+7,Break in,2023,11557
+8,Causing injury,2016,5531
+9,Causing injury,2017,5024
+10,Causing injury,2018,4660
+11,Causing injury,2019,4712
+12,Causing injury,2020,4118
+13,Causing injury,2021,4063
+14,Causing injury,2022,3807
+15,Causing injury,2023,3693
+16,Murder,2016,456
+17,Murder,2017,379
+18,Murder,2018,323
+19,Murder,2019,310
+20,Murder,2020,253
+21,Murder,2021,243
+22,Murder,2022,240
+23,Murder,2023,258
+24,Other theft,2016,22857
+25,Other theft,2017,19444
+26,Other theft,2018,20065
+27,Other theft,2019,19603
+28,Other theft,2020,16725
+29,Other theft,2021,16695
+30,Other theft,2022,15434
+31,Other theft,2023,15837
+32,Rape,2016,1886
+33,Rape,2017,1835
+34,Rape,2018,1648
+35,Rape,2019,1738
+36,Rape,2020,1582
+37,Rape,2021,1553
+38,Rape,2022,1712
+39,Rape,2023,1914
+40,Robbery,2016,14454
+41,Robbery,2017,14128
+42,Robbery,2018,10271
+43,Robbery,2019,9729
+44,Robbery,2020,7326
+45,Robbery,2021,5636
+46,Robbery,2022,4589
+47,Robbery,2023,4588
+48,Vehicle theft,2016,48411
+49,Vehicle theft,2017,42159
+50,Vehicle theft,2018,35953
+51,Vehicle theft,2019,30867
+52,Vehicle theft,2020,21579
+53,Vehicle theft,2021,13432
+54,Vehicle theft,2022,14446
+55,Vehicle theft,2023,14597

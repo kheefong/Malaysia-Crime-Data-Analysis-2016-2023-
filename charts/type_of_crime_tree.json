@@ -1,0 +1,219 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 840,
+  "height": 320,
+  "padding": 5,
+  "autosize": "none",
+
+  "signals": [
+    {"name": "legendWidth", "value": 110},
+    {"name": "layoutWidth", "update": "width - legendWidth"}
+  ],
+
+  "data": [
+    {
+      "name": "source",
+      "values": [
+        {"id": "root", "parent": null, "name": "All Crimes", "crimes": 0},
+        {"id": "Break in", "parent": "root", "name": "Break in", "crimes": 114734},
+        {"id": "Causing injury", "parent": "root", "name": "Causing Injury", "crimes": 35608},
+        {"id": "Murder", "parent": "root", "name": "Murder", "crimes": 2462},
+        {"id": "Other theft", "parent": "root", "name": "Other Theft", "crimes": 146660},
+        {"id": "Rape", "parent": "root", "name": "Rape", "crimes": 13868},
+        {"id": "Robbery", "parent": "root", "name": "Robbery", "crimes": 0},
+        {"id": "Gang Armed", "parent": "Robbery", "name": "Gang Armed", "crimes": 205},
+        {"id": "Gang Unarmed", "parent": "Robbery", "name": "Gang Unarmed", "crimes": 44360},
+        {"id": "Solo Armed", "parent": "Robbery", "name": "Solo Armed", "crimes": 67},
+        {"id": "Solo Unarmed", "parent": "Robbery", "name": "Solo Unarmed", "crimes": 26089},
+        {"id": "Vehicle theft", "parent": "root", "name": "Vehicle Theft", "crimes": 0},
+        {"id": "Lorry Theft", "parent": "Vehicle theft", "name": "Lorry Theft", "crimes": 11504},
+        {"id": "Motorcar Theft", "parent": "Vehicle theft", "name": "Motorcar Theft", "crimes": 47281},
+        {"id": "Motorcycle Theft", "parent": "Vehicle theft", "name": "Motorcycle Theft", "crimes": 162659}
+      ]
+    },
+
+    {
+      "name": "legend_data",
+      "values": [
+        {"name": "Break in", "color": "#B07AA1"},
+        {"name": "Causing Injury", "color": "#3A86FF"},
+        {"name": "Murder", "color": "#E15759"},
+        {"name": "Other Theft", "color": "#B7B7A4"},
+        {"name": "Rape", "color": "#EDC948"},
+        {"name": "Robbery", "color": "#F28E2B"},
+        {"name": "Vehicle Theft", "color": "#4E79A7"}
+      ],
+      "transform": [
+        {"type": "window", "ops": ["row_number"], "as": ["row"]}
+      ]
+    },
+
+    {
+      "name": "tree",
+      "source": "source",
+      "transform": [
+        {"type": "stratify", "key": "id", "parentKey": "parent"},
+        {
+          "type": "treemap",
+          "field": "crimes",
+          "sort": {"field": "value", "order": "descending"},
+          "round": true,
+          "method": "squarify",
+          "ratio": 1.618,
+          "size": [{"signal": "layoutWidth"}, {"signal": "height"}]
+        }
+      ]
+    },
+
+    {
+      "name": "nodes",
+      "source": "tree",
+      "transform": [
+        {"type": "filter", "expr": "datum.children && datum.depth > 0"}
+      ]
+    },
+
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [
+        {"type": "filter", "expr": "!datum.children && datum.depth > 0"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": [
+          "Vehicle theft",
+          "Robbery",
+          "Murder",
+          "Rape",
+          "Break in",
+          "Causing injury",
+          "Other theft"
+        ],
+        "range": [
+          "#4E79A7",
+          "#F28E2B",
+          "#E15759",
+          "#EDC948",
+          "#B07AA1",
+          "#3A86FF",
+          "#B7B7A4"
+        ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "nodes"},
+      "encode": {
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {"scale": "color", "field": "id"},
+          "opacity": {"value": 0.3},
+          "stroke": {"value": "#fff"},
+          "tooltip": {
+            "signal": "{'Category': datum.name, 'Value': format(datum.value, ',')}"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "rect",
+      "from": {"data": "leaves"},
+      "encode": {
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {
+            "signal": "datum.parent === 'root' ? scale('color', datum.id) : scale('color', datum.parent)"
+          },
+          "opacity": {"value": 0.85},
+          "stroke": {"value": "#fff"},
+          "tooltip": {
+            "signal": "{'Type': datum.name, 'Total Crimes': format(datum.crimes, ',')}"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "encode": {
+        "update": {
+          "x": {"signal": "0.5 * (datum.x0 + datum.x1)"},
+          "y": {"signal": "0.5 * (datum.y0 + datum.y1) - 7"},
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 55 && (datum.y1 - datum.y0) > 28 ? datum.name : ''"
+          },
+          "fill": {"value": "#fff"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"signal": "clamp((datum.x1 - datum.x0)/8,9,13)"},
+          "fontWeight": {"value": "600"}
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {"data": "leaves"},
+      "encode": {
+        "update": {
+          "x": {"signal": "0.5 * (datum.x0 + datum.x1)"},
+          "y": {"signal": "0.5 * (datum.y0 + datum.y1) + 9"},
+          "text": {
+            "signal": "(datum.x1 - datum.x0) > 65 && (datum.y1 - datum.y0) > 44 ? format(datum.crimes, ',') : ''"
+          },
+          "fill": {"value": "#fff"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"value": 10}
+        }
+      }
+    },
+
+    
+
+    {
+      "type": "rect",
+      "from": {"data": "legend_data"},
+      "encode": {
+        "update": {
+          "x": {"signal": "layoutWidth + 10"},
+          "y": {"signal": "datum.row * 22 - 20"},
+          "width": {"value": 14},
+          "height": {"value": 14},
+          "fill": {"field": "color"}
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {"data": "legend_data"},
+      "encode": {
+        "update": {
+          "x": {"signal": "layoutWidth + 30"},
+          "y": {"signal": "datum.row * 22 - 12"},
+          "text": {"field": "name"},
+          "fill": {"value": "#333"},
+          "fontSize": {"value": 12},
+          "baseline": {"value": "middle"}
+        }
+      }
+    }
+  ]
+}

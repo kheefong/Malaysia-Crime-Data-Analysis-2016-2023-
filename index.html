@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="hero">
+        <h1>Malaysia Crime Data Analysis (2016-2023)</h1>
+        <p>Exploring crime patterns across states, time, and society</p>
+    </div>
+
+    <div class="container">
+
+        <!-- SECTION 1 -->
+        <section class="section s1">
+            <div class="text">
+                <h2>Is Malaysia Truly Safe?</h2>
+                <p>
+                    At first glance, Malaysia appears relatively safe when compared to many ASEAN countries based on the
+                    Global Peace Index (GPI). However, this ranking is an aggregated measure that combines multiple
+                    dimensions such as societal safety, ongoing conflict, and militarisation.
+                </p>
+
+                <p>
+                    While Malaysia may score better in overall, <strong style="color:#1301b1;">a higher GPI ranking does
+                        not
+                        automatically mean it is “safe” in everyday lived experience</strong>.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart1"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section class="section s2">
+            <div class="text">
+                <h2>How Safe is Malaysia?</h2>
+                <p>
+                    This choropleth map shows crime distribution across Malaysian states from 2016-2023, highlighting
+                    geographic differences rather than a single national total.
+                </p>
+
+                <p>
+                    Malaysia averages about <strong style="color:#1301b1;">76,000 crimes per year</strong>, but the
+                    numbers vary significantly by state.
+                </p>
+
+                <p>
+                    <strong style="color:#1301b1;">W.P. Kuala Lumpur</strong> records the highest crime
+                    levels among all states from 2016 to 2023.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart2"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section class="section s3">
+            <div class="text">
+                <h2>Urban vs Rural Crime</h2>
+                <p>
+                    This chart compares crime counts between urban and rural areas from 2016 to 2023,
+                    showing how incidents are distributed by area type.
+                </p>
+
+                <p>
+                    <strong style="color:#1301b1;">Urban areas consistently record higher crime levels than rural
+                        areas</strong>,
+                    reflecting denser populations and more concentrated activity in cities.
+                </p>
+
+                <p>
+                    The gap highlights a clear difference in
+                    crime patterns between the two environments.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart9"></div>
+            </div>
+        </section>
+
+        <section class="full">
+            <div id="chart5"></div>
+        </section>
+
+        <!-- SECTION 4  -->
+        <section class="section s4">
+            <div class="text">
+                <h2>Types of Crime in Malaysia</h2>
+                <p>
+                    When breaking down crime by type, <strong style="color:#1301b1;">vehicle theft emerges as
+                        the most common offence</strong>. Motorcycle theft, motorcar thft and lorry theft, which
+                    together form a substantial share of overall crime.
+                </p>
+
+                <p>
+                    The dataset also includes serious offences such as <strong style="color:#1301b1;">murder</strong>,
+                    <strong style="color:#1301b1;">rape</strong>, <strong style="color:#1301b1;">break in</strong>, and
+                    cases
+                    involving <strong style="color:#1301b1;">causing injury</strong>.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart3"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 4  -->
+        <section class="section s4">
+            <div class="text">
+                <h2>Low in Proportion, But Too Serious to Overlook</h2>
+                <p>
+                    Although crimes such as <strong style="color:#1301b1;">murder</strong> and <strong
+                        style="color:#1301b1;">rape</strong> represent a small proportion of total crime types, they
+                    should never be normalised or overlooked simply because they occur less frequently.
+                </p>
+
+                <p>
+                    An annual range of <strong style="color:#1301b1;">200-500 murders</strong> and <strong
+                        style="color:#1301b1;">1,500-2,000 rape cases</strong> translates into thousands of lives
+                    directly affected each year. Even if statistically “low,” these figures remain deeply unsettling and
+                    highlight the severe human impact behind the data.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart4"></div>
+            </div>
+        </section>
+
+        <!-- SPLIT SECTION (ONLY TREND + GENDER) -->
+        <section class="split">
+
+            <!-- LEFT -->
+            <div class="chart-card split-a">
+                <h2>Type Of Crime Trends</h2>
+                <p class="insight">
+                    A general <strong style="color:#1301b1;">stabilisation in recent years after
+                        earlier declines</strong>.
+                </p>
+                <div class="chart">
+                    <div id="chart11"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="chart-card split-b">
+                <h2>Gender Gap in Crime</h2>
+                <p class="insight">
+                    Malaysia shows a <strong style="color:#1301b1;">huge gender gap in crime involvement</strong>.
+                </p>
+                <div class="chart">
+                    <div id="chart6"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECTION 5 -->
+        <section class="section s7">
+            <div class="text">
+                <h2>Crime Count Rankings</h2>
+                <p>
+                    When observing crime trends across states over time, one key pattern stands out: the relative
+                    rankings
+                    remain largely unchanged.
+                </p>
+
+                <p>
+                    <strong style="color:#212121;">Selangor consistently records the highest number of crimes
+                        throughout the period</strong>, maintaining its position as the most crime-prone state in the
+                    dataset. In
+                    contrast, <strong style="color:#0D47A1;">Perlis consistently ranks among the lowest
+                        in crime counts</strong>.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart7"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section class="section s5">
+            <div class="text">
+                <h2>A Positive Shift: Overall Crime in Malaysia Has Been Declining</h2>
+                <p>
+                    On a more encouraging note, <strong style="color:#1301b1;">Malaysia has shown a consistent downward
+                        trend in overall crime from
+                        2016 to 2023</strong>, including both urban and rural areas.
+                </p>
+
+                <p>
+                    While urban crime has decreased steadily, <strong style="color:#1301b1;">rural areas show a
+                        much smaller decline</strong>, indicating that
+                    improvements have been less pronounced outside major cities.
+                </p>
+            </div>
+            <div class="chart">
+                <div id="chart8"></div>
+            </div>
+        </section>
+
+        <!-- FINAL SECTION (REFINED DASHBOARD STYLE SPLIT) -->
+        <section class="split">
+
+            <!-- LEFT: RADAR CHART -->
+            <div class="chart-card split-a">
+
+                <h2>Comparing Crime Profiles Across Malaysian States</h2>
+
+                <!-- <p class="insight">
+                    The radar chart compares multiple crime dimensions across Malaysian states.
+                </p> -->
+
+                <div class="chart">
+                    <div id="chart10"></div>
+                    <div id="chart12" class="overlay"></div>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: SUMMARY + SOURCES -->
+            <div class="chart-card split-b split-b-columns">
+
+                <!-- LEFT COLUMN -->
+                <div class="col">
+                    <h2>Conclusion</h2>
+
+                    <p class="insight">
+                        <strong style="color:#1301b1;">Malaysia's crime shows a clear long-term decline from 2016 to
+                            2023, followed by a
+                            period of relative stabilisation in recent years</strong>, where overall crime levels
+                        fluctuate within a
+                        narrower range rather than continuing to fall sharply. This suggests that while major
+                        improvements have been achieved, further reductions may be slower and more incremental.
+                    </p>
+
+                    <p class="insight">
+                        Across all categories, <strong style="color:#1301b1;">vehicle-related theft, especially
+                            motorcycle and motorcar theft —
+                            consistently dominates crime types</strong>, forming the largest share of reported offences.
+                        This
+                        indicates that property-related crimes remain the most persistent challenge in the dataset.
+                    </p>
+
+                </div>
+
+                <!-- RIGHT COLUMN -->
+                <div class="col">
+                    <h2><strong style="color:#eafaf1;">tab</strong></h2>
+
+                    <p class="insight">
+                        While serious offences such as <strong style="color:#1301b1;">murder and rape make up a small
+                            share of total cases, the
+                            absolute numbers remain concerning over time</strong>, still reaching hundreds to thousands
+                        of cases
+                        annually. Although they do not dominate overall trends, their persistence shows that reductions
+                        in total crime do not always lead to proportional declines in violent crime.
+                    </p>
+
+                    <p class="insight">
+                        Overall, <strong style="color:#1301b1;">state rankings and crime patterns stay quite stable over
+                            time</strong>, suggesting they are
+                        driven more by long-term factors like urbanisation and population differences rather than
+                        short-term changes or temporary factors.
+                    </p>
+                </div>
+
+                <!-- FULL WIDTH BOTTOM ROW -->
+                <div class="col full-row">
+                    <h2>Data Sources</h2>
+
+                    <p class="insight">
+                        • <a href="https://open.dosm.gov.my/data-catalogue/prisoners_state?state=malaysia&sex=female&visual=table" target="_blank">Prisoners by State and Sex</a><br>
+                        • <a href="https://open.dosm.gov.my/data-catalogue/crime_district" target="_blank">Crimes by District & Crime Type</a><br>
+                        • <a href="https://www.kaggle.com/datasets/konradb/global-peace-index?utm_source=chatgpt.com&select=peace_index.csv" target="_blank">Global
+                            Peace Index (ASEAN comparisons)</a><br>
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script>
+        vegaEmbed('#chart1', 'charts/gpi_asean.json');
+        vegaEmbed('#chart2', 'charts/crime_by_state.json');
+        vegaEmbed('#chart9', 'charts/urban_vs_rurul.json');
+        vegaEmbed('#chart3', 'charts/type_of_crime_tree.json');
+        vegaEmbed('#chart11', 'charts/type_of_crime_trend.json');
+        vegaEmbed('#chart6', 'charts/male_female.json');
+        vegaEmbed('#chart7', 'charts/crime_trend_by_state.json');
+        vegaEmbed('#chart8', 'charts/malaysia_crime_trend.json');
+        vegaEmbed('#chart10', 'charts/overall.json');
+        vegaEmbed('#chart4', 'charts/srs_crime.json');
+        vegaEmbed('#chart5', 'charts/crime_dominate_each_state.json');
+        vegaEmbed('#chart12', 'charts/overall_legend.json');
+    </script>
+
+</body>
+
+</html>

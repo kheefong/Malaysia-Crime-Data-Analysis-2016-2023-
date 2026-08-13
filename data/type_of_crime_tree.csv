@@ -1,0 +1,13 @@
+crime_group,type,crimes
+Break in,Break in,114734
+Causing injury,Causing injury,35608
+Murder,Murder,2462
+Other theft,Other theft,146660
+Rape,Rape,13868
+Robbery,Gang Armed,205
+Robbery,Gang Unarmed,44360
+Robbery,Solo Armed,67
+Robbery,Solo Unarmed,26089
+Vehicle theft,Lorry Theft,11504
+Vehicle theft,Motorcar Theft,47281
+Vehicle theft,Motorcycle Theft,162659

@@ -1,0 +1,60 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": {
+        "text": "Asean Countries Average Global Peace Index",
+        "fontSize": 18
+    },
+    "width": "container",
+    "height": 300,
+    "data": {
+        "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/gpi_asean.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "mark": {
+        "type": "bar",
+        "size": 20
+    },
+    "encoding": {
+        "x": {
+            "field": "Country",
+            "type": "nominal",
+            "sort": {
+                "field": "avg_gpi",
+                "order": "ascending"
+            },
+            "axis": {
+                "labelAngle": 0,
+                "title": "Country (ASEAN)"
+            }
+        },
+        "y": {
+            "field": "avg_gpi",
+            "type": "quantitative",
+            "axis": {
+                "title": "Average Score"
+            }
+        },
+        "color": {
+            "condition": {
+                "test": "datum.Country === 'Malaysia'",
+                "value": "#1b7f3b"
+            },
+            "value": "#bdbdbd"
+        },
+        "tooltip": [
+            {
+                "field": "Country",
+                "type": "nominal",
+                "title": "Country"
+            },
+            {
+                "field": "avg_gpi",
+                "type": "quantitative",
+                "title": "Average Score",
+                "format": ".3f"
+            }
+        ]
+    }
+}

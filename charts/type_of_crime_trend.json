@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Type Of Crime Trend",
+    "fontSize": 18
+  },
+  "width": "container",
+  "height": 320,
+  "data": {
+    "url": "https://raw.githubusercontent.com/KheeFong283/FIT2179_DV2/refs/heads/main/data/typeOfCrime_trend.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "mark": "line",
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "temporal",
+      "axis": {
+        "format": "%Y",
+        "tickCount": "year",
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "crimes",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "crime_group",
+      "type": "nominal",
+      "legend": {
+        "title": "Crime Type",
+        "orient": "right",
+        "offset": -90,
+        "symbolStrokeWidth": 5
+      },
+      "scale": {
+        "domain": [
+          "Vehicle theft",
+          "Robbery",
+          "Murder",
+          "Rape",
+          "Break in",
+          "Causing injury",
+          "Other theft"
+        ],
+        "range": [
+          "#4E79A7",
+          "#F28E2B",
+          "#E15759",
+          "#EDC948",
+          "#B07AA1",
+          "#3A86FF",
+          "#B7B7A4"
+        ]
+      }
+    }
+  }
+}
